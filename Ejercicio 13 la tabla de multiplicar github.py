@@ -5,4 +5,3 @@ numero = int(input("Escribe un número: "))
 for i in range(1, 11):
     # mostramos la multiplicación
     print(f"{numero} x {i} = {numero * i}")
-    # usamos f-string para mostrar bonito el resultado
