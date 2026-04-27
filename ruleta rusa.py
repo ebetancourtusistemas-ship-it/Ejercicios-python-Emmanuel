@@ -1,0 +1,1 @@
+print("hola bienvenidos a la ruleta rusa")
