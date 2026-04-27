@@ -1,41 +1,73 @@
-import random
 
-# Encabezado decorativo
-print("=" * 50)
-print("JUEGO DE PIEDRA, PAPEL O TIJERA".center(50))
-print("=" * 50)
+'''
+Reto de programación # 1: Piedra, Papel o Tijera
 
-opciones = ['Piedra', 'Papel', 'Tijera']
+1. Descripción de problema
+Se solicita desarrollar un programa interactivo en Python que permita a un usuario enfrentarse contra la computadora en el 
+Clásico juego de Piedra, Papel o Tijera.
+El programa debe ser capaz de procesar la entrada del usuario, generar una respuesta aleatoria y determinar un ganador 
+basándose en las reglas tradicionales.
 
+2. Requerimientos Técnicos
+
+El algoritmo debe estructurarse de la siguiente manera:
+
+* Interfaz Visual: Mostrar un encabezado decorativo utilizando métodos de cadena como .center() y multiplicación de caracteres.
+
+* Entrada de Datos: Solicitar al usuario su elección. El programa debe ser capaz de reconocer la entrada sin importar si 
+se escribe en mayúsculas o minúsculas.
+
+* Inteligencia Aleatoria: La computadora debe elegir una opción de una lista predefinida de opciones (Piedra, Papel, Tijera) 
+de forma aleatoria utilizando el módulo random.
+
+* Logica de comparación:
+
+Implementar las condiciones necesarias para evaluar.
+
+1. Empate: Ambas elecciones son iguales.
+2. Victoria: El usuario vence a la PC (Priedra vence a Tijera, Tijera vence a Papel, Papel vence a Piedra).
+3. Derrota: La PC vence al usuario.
+
+* Control de Flujo: El juego debe repetirse indefinidamente dentro de un blucle hasta que el usuario decida escribir 
+la palabra (Salir).
+
+Solución del Ejercicio Propuesto    
+'''
+
+import random, time
+opciones = ["piedra", "papel", "tijera"]
+print("="*55)
+print("==== PIEDRA PAPEL O TIJERA ====")
+print("="*55)
 while True:
-    usuario = input("Elige escribiendo Piedra, Papel o Tijera (o escribe 'Salir' para terminar): ").strip().capitalize()
-    
-    if usuario == 'Salir':
-        print("¡Gracias por jugar!")
-        break
-    
-    if usuario not in opciones:
-        print("Opción inválida. Inténtalo de nuevo.")
-        continue
+    usuario = input("Elige piedra, papel o tijera (o salir): ").lower()
 
-    computadora = random.choice(opciones)
-    print(f"La computadora eligió: {computadora}")
-    
-    if usuario == computadora:
-        print("¡Es un empate!")
-    elif (usuario == 'Piedra' and computadora == 'Tijera') or \
-         (usuario == 'Tijera' and computadora == 'Papel') or \
-         (usuario == 'Papel' and computadora == 'Piedra'):
-        print("¡Ganaste!")
+    if usuario == "salir":
+        print("="*55)
+        print("Fin del juego  -  Gracias por jugar")
+        print("="*55)
+        break
+
+    pc = random.choice(opciones)
+
+    print("Tú:", usuario)
+
+    time.sleep(1.5)
+    print("PC:", pc)
+
+    time.sleep(1)
+    if usuario == pc:
+        print("Empate")
+    elif usuario == "piedra" and pc == "tijera":
+        print("Ganaste")
+    elif usuario == "tijera" and pc == "papel":
+        print("Ganaste")
+    elif usuario == "papel" and pc == "piedra":
+        print("Ganaste")
     else:
-        print("¡Perdiste!")
-    
-    print("-" * 30)
-    print("¿Quieres jugar de nuevo? (Sí/No)")
-    respuesta = input().strip().capitalize()
-    if respuesta != 'Sí':
-        print("¡Gracias por jugar!")
-        break   
+        print("Perdiste")
+ 
+
 
 
 
