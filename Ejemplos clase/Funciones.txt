@@ -68,6 +68,17 @@ area_triangulo(6,5) # Devolverá 15.0
 ./ Resumen: " El uso de funciones simplifica el código fuente, permite una mejor organización
 del código y apoya en la reutilización de codigo.
 
+Cuando usas funciones tienes que tener en cuenta los siguientes puntos:
+
+1) La definición de las funciones suele hacerse al principio de los programas.
+2) La indentación de la función y el bloque de instrucciones que tienen dentro
+   sigue las mismas reglas de indentación que el resto del código.
+3) Tienes que tener cuidado con el nombre de las variables que utilizas dentro de las funciones
+   ya que si tu programa utiliza variables con el mismo nombre puedes obtener resultados no esperados.
+4) Por defecto, las variables que se usan dentro de la función únicamente tiene validez
+   dentro de la función, no vas a poder acceder desde afuera de la función a las variables
+   que tiene definidas dentro es decir variables locales.
+
 
 
 
