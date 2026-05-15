@@ -6,33 +6,33 @@
   Materia    : Fundamentos de Programación
   Fecha      : Lunes 18 de Mayo del 2026
   Propósito  : Construir un documento vivo donde cada concepto
-               de funciones en Python se explica y se ejecuta
-               al mismo tiempo, demostrando los 6 temas.
+               de funciones en Python se explica con comentarios
+               y se demuestra con código ejecutable, basado en
+               el Capítulo 4 de ellibrodepython.com
 ===========================================================
 """
-
-import random
 
 # ===========================================================
 # --- 1. DEFINICIÓN BÁSICA ---
 # ===========================================================
 
-# Una función es un bloque de código reutilizable que solo se ejecuta
-# cuando la llamamos. Se define con 'def' seguido del nombre y paréntesis.
+# Una función es un bloque de código reutilizable.
+# Se define usando la palabra clave 'def'.
+# Solo se ejecuta cuando la llamamos por su nombre.
+# Sin la llamada, el código de adentro nunca corre.
+
+print("╔══════════════════════════════════════════════════╗")
+print("║              1. DEFINICION BÁSICA                ║")
+print("╚══════════════════════════════════════════════════╝")
 
 def mostrar_bienvenida():
     """
-    Función básica sin parámetros ni return.
-    Demuestra la estructura mínima de una función en Python.
+    Función sin parámetros de entrada ni de salida.
+    Solo ejecuta instrucciones cuando es llamada.
+    Fuente: ellibrodepython.com - Capítulo 4.
     """
-    print("╔══════════════════════════════════════════╗")
-    print("║      TIPO 1 — DEFINICIÓN BÁSICA          ║")
-    print("╠══════════════════════════════════════════╣")
-    print("║   Bienvenido al taller de funciones      ║")
-    print("║   Python — Fundamentos de Programación   ║")
-    print("╚══════════════════════════════════════════╝")
+    print("  >> Bienvenido al taller de funciones en Python.")
 
-# Llamamos la función por su nombre seguido de paréntesis
 mostrar_bienvenida()
 
 
@@ -40,23 +40,26 @@ mostrar_bienvenida()
 # --- 2. PARÁMETROS Y ARGUMENTOS ---
 # ===========================================================
 
-# Los parámetros permiten enviarle datos a la función.
-# Posicionales: el orden importa. Por nombre: el orden NO importa.
+# Los parámetros son variables que reciben datos externos.
+# Los argumentos son los valores que pasamos al llamar la función.
+# En argumentos posicionales, el orden determina qué valor va a qué parámetro.
+# En argumentos por nombre, indicamos explícitamente a qué parámetro va cada valor.
+# Con argumentos por nombre el orden ya no importa.
 
-def registrar_estudiante(nombre, edad, carrera):
-    # Recibe tres parámetros y los muestra. No devuelve nada (sin return).
-    print("╔══════════════════════════════════════════╗")
-    print("║      TIPO 2 — PARÁMETROS Y ARGUMENTOS    ║")
-    print("╚══════════════════════════════════════════╝")
-    print(f"  Nombre  : {nombre}")
-    print(f"  Edad    : {edad} años")
-    print(f"  Carrera : {carrera}")
+print("╔══════════════════════════════════════════════════╗")
+print("║           2. PARAMETROS Y ARGUMENTOS             ║")
+print("╚══════════════════════════════════════════════════╝")
 
-# Argumentos POSICIONALES — el orden debe coincidir con los parámetros
-registrar_estudiante("Laura Torres", 19, "Ingeniería de Sistemas")
+def mostrar_resta(a, b):
+    print(f"     {a} - {b} = {a - b}")
 
-# Argumentos POR NOMBRE — el orden no importa porque indicamos el nombre
-registrar_estudiante(carrera="Diseño Gráfico", edad=21, nombre="Camilo Ríos")
+# Llamada por posición: el primer valor va a 'a', el segundo a 'b'.
+print("  >> Por posición:")
+mostrar_resta(10, 3)
+
+# Llamada por nombre: cada valor lleva la etiqueta de su parámetro.
+print("  >> Por nombre (el orden no importa):")
+mostrar_resta(b=3, a=10)
 
 
 # ===========================================================
@@ -64,33 +67,42 @@ registrar_estudiante(carrera="Diseño Gráfico", edad=21, nombre="Camilo Ríos")
 # ===========================================================
 
 # 'return' hace que la función entregue un resultado hacia afuera.
-# Sin return, la función solo ejecuta cosas pero no devuelve nada útil.
+# Sin return, el resultado queda atrapado dentro de la función.
+# Gracias a return podemos guardar el resultado en una variable.
+# También podemos usar el resultado directamente en condiciones.
+# return además detiene la ejecución de la función al instante.
+
+print("╔══════════════════════════════════════════════════╗")
+print("║             3. SENTENCIA RETURN                  ║")
+print("╚══════════════════════════════════════════════════╝")
 
 def calcular_promedio(nota1, nota2, nota3):
     """
-    Calcular el promedio de tres notas académicas.
+    Calcula el promedio de tres notas y lo devuelve.
+
+    ¿Por qué usamos return aquí?
+    Porque el promedio es un dato que necesitamos fuera
+    de la función: para guardarlo, compararlo o imprimirlo.
 
     Parámetros:
-        nota1, nota2, nota3 (float): Las tres notas del estudiante.
+        nota1 (float): Primera nota.
+        nota2 (float): Segunda nota.
+        nota3 (float): Tercera nota.
     Retorna:
         float: El promedio redondeado a 2 decimales.
     """
     promedio = (nota1 + nota2 + nota3) / 3
-    return round(promedio, 2)  # El resultado sale de la función con return
+    return round(promedio, 2)
 
-print("╔══════════════════════════════════════════╗")
-print("║       TIPO 3 — SENTENCIA RETURN          ║")
-print("╚══════════════════════════════════════════╝")
-
-# Guardamos el valor retornado en una variable para usarlo después
+# El valor retornado se guarda en una variable para usarlo después.
 mi_promedio = calcular_promedio(3.5, 4.2, 3.8)
-print(f"  Promedio calculado: {mi_promedio}")
+print(f"  >> Promedio obtenido : {mi_promedio}")
 
-# El return también nos permite usar el resultado en condiciones
-if calcular_promedio(2.5, 3.0, 2.8) >= 3.0:
-    print("  Estado: Aprobado ✓")
+# Aquí usamos el return directamente dentro de un if.
+if calcular_promedio(2.0, 2.5, 1.8) >= 3.0:
+    print("  >> Estado            : Aprobado  ✓")
 else:
-    print("  Estado: Reprobado ✗")
+    print("  >> Estado            : Reprobado ✗")
 
 
 # ===========================================================
@@ -99,74 +111,92 @@ else:
 
 # Un parámetro por defecto ya tiene un valor asignado desde la definición.
 # Si no lo enviamos al llamar la función, Python usa ese valor automáticamente.
-# Regla : los parámetros con defecto siempre van al final de la lista.
+# Esto hace que el parámetro sea opcional en la llamada.
+# Los parámetros con defecto siempre van al FINAL de la lista.
+# Solo lo sobreescribimos cuando necesitamos un valor diferente.
 
-def generar_reporte(nombre, semestre, estado="Activo"):
+print("╔══════════════════════════════════════════════════╗")
+print("║             4. PARAMETROS POR DEFECTO            ║")
+print("╚══════════════════════════════════════════════════╝")
+
+def registrar_estudiante(nombre, semestre, estado="Activo"):
     """
-    Genera un reporte del estudiante.
-    El parámetro 'estado' es opcional; si no se pasa, usa 'Activo'.
+    Registra un estudiante con su nombre, semestre y estado.
+
+    ¿Por qué 'estado' tiene valor por defecto?
+    Porque la mayoría de estudiantes están activos. Solo lo
+    pasamos cuando el estado es diferente al habitual.
+
+    Parámetros:
+        nombre   (str): Nombre del estudiante.
+        semestre (int): Semestre actual.
+        estado   (str): Estado académico. Por defecto: 'Activo'.
     """
-    print(f"  Reporte | {nombre} | Semestre {semestre} | Estado: {estado}")
+    print(f"  >> {nombre:<20} | Semestre {semestre} | Estado: {estado}")
 
-print("╔══════════════════════════════════════════╗")
-print("║     TIPO 4 — PARÁMETROS POR DEFECTO      ║")
-print("╚══════════════════════════════════════════╝")
+# No enviamos 'estado', Python usa "Activo" automáticamente.
+registrar_estudiante("Laura Torres", 1)
 
-# Solo enviamos los obligatorios; 'estado' usa su valor por defecto
-generar_reporte("Sofía Mendez", 1)
+# Aquí el estado es diferente, así que lo sobreescribimos.
+registrar_estudiante("Carlos Pérez", 3, "Beca Completa")
 
-# Sobreescribimos el valor por defecto enviando un argumento
-generar_reporte("Andrés Gil", 3, "Beca")
-
-# También se puede pasar por nombre
-generar_reporte("Valentina Cruz", 2, estado="Suspendido")
+# También podemos pasarlo por nombre para mayor claridad.
+registrar_estudiante("Sofía Mendez", 2, estado="Suspendido")
 
 
 # ===========================================================
 # --- 5. SCOPE: VARIABLES LOCALES VS GLOBALES ---
 # ===========================================================
 
-# Variable GLOBAL: se define fuera de las funciones, toda la app la ve.
-# Variable LOCAL: se define dentro de una función, solo vive ahí.
-# Esto importa porque evita errores al usar el mismo nombre en dos lugares.
+# Variable GLOBAL: se define fuera de las funciones.
+# Una variable global es visible en todo el programa.
+# Variable LOCAL: se define dentro de una función.
+# Una variable local solo existe mientras la función se ejecuta.
+# Intentar usar una variable local afuera causa un error NameError.
 
-universidad = "Universidad del Quindío"   # Variable GLOBAL
+print("╔══════════════════════════════════════════════════╗")
+print("║           5. SCOPE: LOCAL VS GLOBAL              ║")
+print("╚══════════════════════════════════════════════════╝")
 
-def mostrar_info():
-    ciudad = "Armenia"                     # Variable LOCAL — solo existe aquí
-    print(f"  Universidad : {universidad}") # Puede leer la global sin problema
-    print(f"  Ciudad      : {ciudad}")      # Lee su propia variable local
+nombre_universidad = "Universidad del Quindío"  # Variable GLOBAL
 
-print("╔══════════════════════════════════════════╗")
-print("║     TIPO 5 — SCOPE: LOCAL VS GLOBAL      ║")
-print("╚══════════════════════════════════════════╝")
+def mostrar_sede():
+    ciudad = "Armenia, Colombia"  # Variable LOCAL: solo vive aquí adentro.
+    print(f"  >> Universidad   : {nombre_universidad}")
+    print(f"  >> Ciudad (local): {ciudad}")
 
-mostrar_info()
-print(f"  Global accesible afuera: {universidad}")
-# print(ciudad)  ← esto daría ERROR: 'ciudad' no existe fuera de la función
+mostrar_sede()
+
+# La variable global sigue disponible fuera de la función.
+print(f"  >> Global afuera : {nombre_universidad}")
+# print(ciudad)  <-- esto causaría NameError porque 'ciudad' es local.
 
 
 # ===========================================================
 # --- 6. ARGUMENTOS VARIABLES (*args) ---
 # ===========================================================
 
-# *args permite que una función reciba cualquier cantidad de argumentos.
-# Python los agrupa en una tupla que podemos recorrer con un for.
+# *args permite recibir cualquier cantidad de argumentos.
+# Python empaqueta todos esos valores en una tupla automáticamente.
+# Podemos recorrer esa tupla con un ciclo for.
 # Es útil cuando no sabemos cuántos valores recibirá la función.
+# La misma función sirve para 2, 5 o cualquier cantidad de argumentos.
 
-def calcular_mejor_nota(*notas):
-    # Sin *args tendríamos que definir un parámetro fijo por cada nota posible,
-    # lo cual haría el código inflexible y difícil de mantener.
-    mejor = 0
-    for nota in notas:
-        if nota > mejor:
-            mejor = nota
-    return mejor
+print("╔══════════════════════════════════════════════════╗")
+print("║             6. ARGUMENTOS VARIABLES              ║")
+print("║                      (*ARGS)                     ║")
+print("╚══════════════════════════════════════════════════╝")
 
-print("╔══════════════════════════════════════════╗")
-print("║   TIPO 6 — ARGUMENTOS VARIABLES *args    ║")
-print("╚══════════════════════════════════════════╝")
 
-# La misma función acepta 3, 5 o cualquier cantidad de notas
-print(f"  Mejor nota (3 materias): {calcular_mejor_nota(3.2, 4.5, 3.8)}")
-print(f"  Mejor nota (5 materias): {calcular_mejor_nota(2.9, 3.7, 4.1, 3.5, 4.8)}")
+def sumar_notas(*notas):
+    total = 0
+    for nota in notas:  # 'notas' es una tupla con todos los valores recibidos.
+        total += nota
+    return total
+
+# La misma función acepta diferente cantidad de argumentos cada vez.
+print(f"  >> Suma de 2 notas : {sumar_notas(4.0, 3.5)}")
+print(f"  >> Suma de 4 notas : {sumar_notas(3.2, 4.5, 3.8, 4.1)}")
+print(f"  >> Suma de 6 notas : {sumar_notas(2.5, 3.0, 4.0, 3.5, 4.8, 3.2)}")
+
+
