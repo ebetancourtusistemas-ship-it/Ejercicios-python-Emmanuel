@@ -155,7 +155,8 @@ print(f"  Global accesible afuera: {universidad}")
 # Es útil cuando no sabemos cuántos valores recibirá la función.
 
 def calcular_mejor_nota(*notas):
-    # Recorre todas las notas recibidas y encuentra la más alta
+    # Sin *args tendríamos que definir un parámetro fijo por cada nota posible,
+    # lo cual haría el código inflexible y difícil de mantener.
     mejor = 0
     for nota in notas:
         if nota > mejor:
