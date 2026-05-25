@@ -75,7 +75,6 @@ mostrar_resta(b=3, a=10)
 print("╔══════════════════════════════════════════════════╗")
 print("║             3. SENTENCIA RETURN                  ║")
 print("╚══════════════════════════════════════════════════╝")
-
 def calcular_promedio(nota1, nota2, nota3):
     """
     Calcula el promedio de tres notas y lo devuelve.

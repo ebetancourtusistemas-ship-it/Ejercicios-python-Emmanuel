@@ -61,67 +61,382 @@ Ingrese la nota: 4.5
 Elige una opción: 4
 Promedio de Matemáticas: 4.5
 
-Tips de lógica para el estudiante
 • Puedes usar una lista para guardar todas las materias.
 • Cada materia puede guardarse como un diccionario con nombre y lista de notas.
 • Usa ciclos while para el menú y for para recorrer materias.
 • Usa condicionales para verificar si una materia aprueba o pierde.
 
 """
+import os
+import time
 
 materias = []
 
+
+# ============================================
+# ANIMACION DE CARGA
+# ============================================
+def cargar_sistema():
+
+    for i in range(101):
+
+        barra = "■" * (i // 2)
+        espacio = " " * (50 - (i // 2))
+
+        print(f"\rCargando sistema |{barra}{espacio}| {i}%",
+              end="")
+
+        time.sleep(0.02)
+
+    print("\nSistema iniciado correctamente")
+    time.sleep(1)
+
+
+# ============================================
+# LIMPIAR CONSOLA
+# ============================================
+def limpiar():
+    os.system("cls")
+
+
+# ============================================
+# MENU
+# ============================================
+def menu():
+
+    limpiar()
+
+    print("=" * 55)
+    print("        SISTEMA DE CONTROL DE NOTAS")
+    print("=" * 55)
+
+    print("""
+        ____________________________
+       /                           /|
+      /___________________________/ |
+      |                           | |
+      |   1. Registrar materia    | |
+      |   2. Agregar nota         | |
+      |   3. Ver materias         | |
+      |   4. Promedio materia     | |
+      |   5. Promedio general     | |
+      |   6. Materias aprobadas   | |
+      |   7. Mejor materia        | |
+      |   8. Peor materia         | |
+      |   9. Buscar materia       | |
+      |  10. Eliminar materia     | |
+      |  11. Salir                | |
+      |___________________________|/
+    """)
+
+
+# ============================================
+# BUSCAR MATERIA
+# ============================================
+def buscar(nombre):
+
+    for materia in materias:
+
+        if materia["nombre"].lower() == nombre.lower():
+            return materia
+
+    return None
+
+
+# ============================================
+# INICIO
+# ============================================
+cargar_sistema()
+
 while True:
-    print("\n" + "=" * 35)
-    print("   SISTEMA DE CONTROL DE NOTAS")
-    print("=" * 35)
-    print("1. Registrar materia")
-    print("2. Agregar nota")
-    print("3. Ver materias")
-    print("4. Calcular promedio por materia")
-    print("5. Ver promedio general")
-    print("6. Materias aprobadas y perdidas")
-    print("7. Mejor materia")
-    print("8. Peor materia")
-    print("9. Buscar materia")
-    print("10. Eliminar materia")
-    print("11. Salir")
 
-    opcion = input("Elige una opcion: ")
+    menu()
 
+    opcion = input("Seleccione una opcion: ")
+
+    # ============================================
+    # REGISTRAR MATERIA
+    # ============================================
     if opcion == "1":
-        print("Registrar materia")
 
+        nombre = input("Ingrese el nombre de la materia: ")
+
+        if buscar(nombre):
+
+            print("La materia ya existe")
+
+        else:
+
+            materias.append({
+                "nombre": nombre,
+                "notas": []
+            })
+
+            print("Materia registrada correctamente")
+
+        input("\nPresione ENTER para continuar...")
+
+
+    # ============================================
+    # AGREGAR NOTA
+    # ============================================
     elif opcion == "2":
-        print("Agregar nota")
 
+        nombre = input("Ingrese la materia: ")
+
+        materia = buscar(nombre)
+
+        if materia:
+
+            nota = float(input("Ingrese la nota: "))
+
+            if 0 <= nota <= 5:
+
+                materia["notas"].append(nota)
+
+                print("Nota agregada correctamente")
+
+            else:
+
+                print("Nota invalida")
+
+        else:
+
+            print("Materia no encontrada")
+
+        input("\nPresione ENTER para continuar...")
+
+
+    # ============================================
+    # VER MATERIAS
+    # ============================================
     elif opcion == "3":
-        print("Ver materias")
 
+        if len(materias) == 0:
+
+            print("No hay materias registradas")
+
+        else:
+
+            for materia in materias:
+
+                print("\n--------------------------------")
+
+                print("Materia:", materia["nombre"])
+                print("Notas:", materia["notas"])
+
+                print("--------------------------------")
+
+        input("\nPresione ENTER para continuar...")
+
+
+    # ============================================
+    # PROMEDIO POR MATERIA
+    # ============================================
     elif opcion == "4":
-        print("Calcular promedio por materia")
 
+        nombre = input("Ingrese la materia: ")
+
+        materia = buscar(nombre)
+
+        if materia:
+
+            if len(materia["notas"]) > 0:
+
+                promedio = sum(materia["notas"]) / len(materia["notas"])
+
+                print(f"Promedio de {nombre}: {round(promedio,2)}")
+
+            else:
+
+                print("La materia no tiene notas")
+
+        else:
+
+            print("Materia no encontrada")
+
+        input("\nPresione ENTER para continuar...")
+
+
+    # ============================================
+    # PROMEDIO GENERAL
+    # ============================================
     elif opcion == "5":
-        print("Ver promedio general")
 
+        total = 0
+        cantidad = 0
+
+        for materia in materias:
+
+            total += sum(materia["notas"])
+            cantidad += len(materia["notas"])
+
+        if cantidad > 0:
+
+            promedio_general = total / cantidad
+
+            print("Promedio general:", round(promedio_general,2))
+
+        else:
+
+            print("No hay notas registradas")
+
+        input("\nPresione ENTER para continuar...")
+
+
+    # ============================================
+    # APROBADAS Y PERDIDAS
+    # ============================================
     elif opcion == "6":
-        print("Materias aprobadas y perdidas")
 
+        for materia in materias:
+
+            if len(materia["notas"]) > 0:
+
+                promedio = sum(materia["notas"]) / len(materia["notas"])
+
+                if promedio >= 3:
+
+                    estado = "APROBADA"
+
+                else:
+
+                    estado = "PERDIDA"
+
+                print("\nMateria:", materia["nombre"])
+                print("Estado:", estado)
+
+        input("\nPresione ENTER para continuar...")
+
+
+    # ============================================
+    # MEJOR MATERIA
+    # ============================================
     elif opcion == "7":
-        print("Mejor materia")
 
+        mejor = None
+        mejor_promedio = 0
+
+        for materia in materias:
+
+            if len(materia["notas"]) > 0:
+
+                promedio = sum(materia["notas"]) / len(materia["notas"])
+
+                if promedio > mejor_promedio:
+
+                    mejor_promedio = promedio
+                    mejor = materia["nombre"]
+
+        if mejor:
+
+            print("Mejor materia:", mejor)
+            print("Promedio:", round(mejor_promedio,2))
+
+        else:
+
+            print("No hay datos")
+
+        input("\nPresione ENTER para continuar...")
+
+
+    # ============================================
+    # PEOR MATERIA
+    # ============================================
     elif opcion == "8":
-        print("Peor materia")
 
+        peor = None
+        peor_promedio = 5
+
+        for materia in materias:
+
+            if len(materia["notas"]) > 0:
+
+                promedio = sum(materia["notas"]) / len(materia["notas"])
+
+                if promedio < peor_promedio:
+
+                    peor_promedio = promedio
+                    peor = materia["nombre"]
+
+        if peor:
+
+            print("Peor materia:", peor)
+            print("Promedio:", round(peor_promedio,2))
+
+        else:
+
+            print("No hay datos")
+
+        input("\nPresione ENTER para continuar...")
+
+
+    # ============================================
+    # BUSCAR MATERIA
+    # ============================================
     elif opcion == "9":
-        print("Buscar materia")
 
+        nombre = input("Ingrese la materia a buscar: ")
+
+        materia = buscar(nombre)
+
+        if materia:
+
+            print("\nMateria encontrada")
+            print("Nombre:", materia["nombre"])
+            print("Notas:", materia["notas"])
+
+        else:
+
+            print("Materia no encontrada")
+
+        input("\nPresione ENTER para continuar...")
+
+
+    # ============================================
+    # ELIMINAR MATERIA
+    # ============================================
     elif opcion == "10":
-        print("Eliminar materia")
 
+        nombre = input("Ingrese la materia a eliminar: ")
+
+        materia = buscar(nombre)
+
+        if materia:
+
+            materias.remove(materia)
+
+            print("Materia eliminada correctamente")
+
+        else:
+
+            print("Materia no encontrada")
+
+        input("\nPresione ENTER para continuar...")
+
+
+    # ============================================
+    # SALIR
+    # ============================================
     elif opcion == "11":
-        print("Programa finalizado")
+
+        print("\nCerrando sistema...")
+
+        for i in range(5):
+
+            print("■", end="", flush=True)
+            time.sleep(0.4)
+
+        print("\nPrograma finalizado")
+
         break
 
+
+    # ============================================
+    # ERROR
+    # ============================================
     else:
-        print("Opcion no valida")
+
+        print("Opcion invalida")
+
+        input("\nPresione ENTER para continuar...")
