@@ -206,7 +206,7 @@ niveles = [
 ]
 
 # ==========================
-# LIMPIAR PANTALLA
+# Limpiar pantalla
 # ==========================
 
 def limpiar_pantalla():
@@ -215,7 +215,7 @@ def limpiar_pantalla():
 
 
 # ==========================
-# MOSTRAR MAPA
+# Mostrar el mapa en pantalla
 # ==========================
 
 def dibujar_mapa(mapa):
@@ -232,7 +232,7 @@ def dibujar_mapa(mapa):
 
 
 # ==========================
-# BUSCAR JUGADOR
+# Buscar posición del jugador
 # ==========================
 
 def obtener_posicion_jugador(mapa):
@@ -246,7 +246,7 @@ def obtener_posicion_jugador(mapa):
 
 
 # ==========================
-# MOVIMIENTO
+# Movimiento y Colisiones
 # ==========================
 
 def mover(mapa, direccion):
@@ -284,14 +284,14 @@ def mover(mapa, direccion):
     siguiente = mapa[nueva_fila][nueva_columna]
 
     # ======================
-    # SI ES PARED
+    # Si es pared, no hacer nada
     # ======================
 
     if siguiente == "#":
         return
 
     # ======================
-    # SI ES ESPACIO O META
+    # Si es espacio o meta, mover jugador
     # ======================
 
     if siguiente == " " or siguiente == ".":
@@ -300,7 +300,7 @@ def mover(mapa, direccion):
         mapa[nueva_fila][nueva_columna] = "@"
 
     # ======================
-    # SI ES CAJA
+    # Si es caja, intentar empujar
     # ======================
 
     elif siguiente == "$":
@@ -335,7 +335,7 @@ def mover(mapa, direccion):
 
 
 # ==========================
-# GANAR NIVEL
+# ganar nivel
 # ==========================
 
 def nivel_completado(mapa):
@@ -349,7 +349,7 @@ def nivel_completado(mapa):
 
 
 # ==========================
-# INICIO DEL JUEGO
+# Inicio del Juego
 # ==========================
 
 nivel_actual = 0
