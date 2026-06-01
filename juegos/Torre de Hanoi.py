@@ -1,8 +1,8 @@
 import os
 
-def limpiar_pantalla():
+def limpiar_pantalla(): 
     # Limpia la Consola para dar el Efecto de Animación
-    os.system('cls' if os.name == 'nt' else 'clear')
+    os.system('cls' if os.name == 'nt' else 'clear') 
 
 def dibujar_torres(torres, n):
     
@@ -83,7 +83,7 @@ def jugar_hanoi(n=3):
     print(f"¡Felicidades! Has completado la Torre de Hanoi en {movimientos} movimientos.")
     input("Presione Enter para salir...")
 
-if __name__ == "__main__":
+if __name__ == "__main__": 
     #Puedes cambiar este número para jugar con más o menos discos 
     # (recomiendo no más de 5 para mantenerlo manejable)
     jugar_hanoi(3)
