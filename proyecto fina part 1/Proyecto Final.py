@@ -67,7 +67,7 @@ Promedio de Matemáticas: 4.5
 • Usa condicionales para verificar si una materia aprueba o pierde.
 
 """
-import os
+import os 
 import time
 
 materias = []
@@ -88,6 +88,8 @@ def cargar_sistema():
 
         time.sleep(0.02)
 
+        # aqui hacemos la animacion de carga
+
     print("\nSistema iniciado correctamente")
     time.sleep(1)
 
@@ -96,7 +98,7 @@ def cargar_sistema():
 # LIMPIAR CONSOLA
 # ============================================
 def limpiar():
-    os.system("cls")
+    os.system("cls") 
 
 
 # ============================================
@@ -137,8 +139,9 @@ def buscar(nombre):
 
     for materia in materias:
 
-        if materia["nombre"].lower() == nombre.lower():
+        if materia["nombre"].lower() == nombre.lower(): 
             return materia
+        # aqui hacemos la busqueda de la materia por su nombre
 
     return None
 
@@ -158,6 +161,7 @@ while True:
     # REGISTRAR MATERIA
     # ============================================
     if opcion == "1":
+        # si se elige la opcion 1, se registra una nueva materia
 
         nombre = input("Ingrese el nombre de la materia: ")
 
@@ -170,8 +174,7 @@ while True:
             materias.append({
                 "nombre": nombre,
                 "notas": []
-            })
-
+            })     #append para agregar la materia a la lista de materias
             print("Materia registrada correctamente")
 
         input("\nPresione ENTER para continuar...")
@@ -181,6 +184,7 @@ while True:
     # AGREGAR NOTA
     # ============================================
     elif opcion == "2":
+        # si se elige la opcion 2, se agrega una nota a una materia existente
 
         nombre = input("Ingrese la materia: ")
 
@@ -188,11 +192,11 @@ while True:
 
         if materia:
 
-            nota = float(input("Ingrese la nota: "))
+            nota = float(input("Ingrese la nota: "))   
 
             if 0 <= nota <= 5:
 
-                materia["notas"].append(nota)
+                materia["notas"].append(nota)  #append para agregar la nota a la lista de notas de la materia
 
                 print("Nota agregada correctamente")
 
@@ -204,21 +208,22 @@ while True:
 
             print("Materia no encontrada")
 
-        input("\nPresione ENTER para continuar...")
+        input("\nPresione ENTER para continuar...")  
 
 
     # ============================================
     # VER MATERIAS
     # ============================================
     elif opcion == "3":
+        # si se elige la opcion 3, se muestran todas las materias registradas con sus notas
 
-        if len(materias) == 0:
+        if len(materias) == 0:  # el len de materias es 0, significa que no hay materias registradas 
 
             print("No hay materias registradas")
 
         else:
 
-            for materia in materias:
+            for materia in materias: # aqui recorremos la lista de materias para mostrar cada una con sus notas
 
                 print("\n--------------------------------")
 
@@ -234,6 +239,7 @@ while True:
     # PROMEDIO POR MATERIA
     # ============================================
     elif opcion == "4":
+        # si se elige la opcion 4, se calcula y muestra el promedio de una materia especifica
 
         nombre = input("Ingrese la materia: ")
 
@@ -241,11 +247,11 @@ while True:
 
         if materia:
 
-            if len(materia["notas"]) > 0:
+            if len(materia["notas"]) > 0: 
 
-                promedio = sum(materia["notas"]) / len(materia["notas"])
+                promedio = sum(materia["notas"]) / len(materia["notas"]) # aqui calculamos el promedio de las notas de la materia sumando todas las notas y dividiendo por la cantidad de notas
 
-                print(f"Promedio de {nombre}: {round(promedio,2)}")
+                print(f"Promedio de {nombre}: {round(promedio,2)}")  # el round para mostrar el promedio con 2 decimales 
 
             else:
 
@@ -262,20 +268,21 @@ while True:
     # PROMEDIO GENERAL
     # ============================================
     elif opcion == "5":
+        # si se elige la opcion 5, se calcula y muestra el promedio general de todas las materias
 
         total = 0
         cantidad = 0
 
         for materia in materias:
 
-            total += sum(materia["notas"])
-            cantidad += len(materia["notas"])
+            total += sum(materia["notas"])   # aqui sumamos todas las notas de todas las materias para obtener el total de notas ingresadas
+            cantidad += len(materia["notas"]) # += para contar la cantidad total de notas ingresadas en todas las materias
 
         if cantidad > 0:
 
             promedio_general = total / cantidad
 
-            print("Promedio general:", round(promedio_general,2))
+            print("Promedio general:", round(promedio_general,2)) 
 
         else:
 
@@ -288,12 +295,13 @@ while True:
     # APROBADAS Y PERDIDAS
     # ============================================
     elif opcion == "6":
+        # si se elige la opcion 6, se muestra el estado de cada materia (aprobada o perdida) dependiendo del promedio de sus notas
 
         for materia in materias:
 
-            if len(materia["notas"]) > 0:
+            if len(materia["notas"]) > 0:  # aqui verificamos que la materia tenga notas para poder calcular su promedio y determinar si esta aprobada o perdida
 
-                promedio = sum(materia["notas"]) / len(materia["notas"])
+                promedio = sum(materia["notas"]) / len(materia["notas"]) # sacamos el promedio de las notas de la materia
 
                 if promedio >= 3:
 
@@ -313,20 +321,21 @@ while True:
     # MEJOR MATERIA
     # ============================================
     elif opcion == "7":
+        # si se elige la opcion 7, se busca y muestra la materia con el mejor promedio entre todas las materias registradas
 
         mejor = None
         mejor_promedio = 0
 
         for materia in materias:
 
-            if len(materia["notas"]) > 0:
+            if len(materia["notas"]) > 0: # aqui verificamos que la materia tenga notas para poder calcular su promedio y compararlo con el mejor promedio encontrado hasta ahora
 
-                promedio = sum(materia["notas"]) / len(materia["notas"])
+                promedio = sum(materia["notas"]) / len(materia["notas"]) # aqui calculamos el promedio de las notas de la materia para compararlo con el mejor promedio encontrado hasta ahora
 
                 if promedio > mejor_promedio:
 
                     mejor_promedio = promedio
-                    mejor = materia["nombre"]
+                    mejor = materia["nombre"] # aqui guardamos el nombre de la materia que tiene el mejor promedio encontrado hasta ahora
 
         if mejor:
 
@@ -344,6 +353,7 @@ while True:
     # PEOR MATERIA
     # ============================================
     elif opcion == "8":
+        # si se elige la opcion 8, se busca y muestra la materia con el peor promedio entre todas las materias registradas
 
         peor = None
         peor_promedio = 5
@@ -352,12 +362,12 @@ while True:
 
             if len(materia["notas"]) > 0:
 
-                promedio = sum(materia["notas"]) / len(materia["notas"])
+                promedio = sum(materia["notas"]) / len(materia["notas"]) # aqui calculamos el promedio de las notas de la materia para compararlo con el peor promedio encontrado hasta ahora
 
                 if promedio < peor_promedio:
 
                     peor_promedio = promedio
-                    peor = materia["nombre"]
+                    peor = materia["nombre"] # aqui guardamos el nombre de la materia que tiene el peor promedio encontrado hasta ahora
 
         if peor:
 
@@ -375,6 +385,7 @@ while True:
     # BUSCAR MATERIA
     # ============================================
     elif opcion == "9":
+        # si se elige la opcion 9, se busca una materia por su nombre y se muestra su informacion (nombre y notas)
 
         nombre = input("Ingrese la materia a buscar: ")
 
@@ -397,6 +408,7 @@ while True:
     # ELIMINAR MATERIA
     # ============================================
     elif opcion == "10":
+        # si se elige la opcion 10, se busca una materia por su nombre y se elimina de la lista de materias si es encontrada
 
         nombre = input("Ingrese la materia a eliminar: ")
 
@@ -404,7 +416,7 @@ while True:
 
         if materia:
 
-            materias.remove(materia)
+            materias.remove(materia) # remove para eliminar la materia encontrada de la lista de materias
 
             print("Materia eliminada correctamente")
 
@@ -419,17 +431,18 @@ while True:
     # SALIR
     # ============================================
     elif opcion == "11":
+        # si se elige la opcion 11, se muestra una animacion de carga y se cierra el programa
 
         print("\nCerrando sistema...")
 
         for i in range(5):
 
-            print("■", end="", flush=True)
+            print("■", end="", flush=True)  # aqui hacemos la animacion de carga al cerrar el sistema, el flush para que se muestre cada ■ sin esperar a que termine el ciclo
             time.sleep(0.4)
 
         print("\nPrograma finalizado")
 
-        break
+        break 
 
 
     # ============================================
